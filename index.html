@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The BAAYIODUU Model Archive</title>
+    
+    <!-- Google Fonts: Inter for prose, JetBrains Mono for technical data -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Marked.js for Markdown Parsing (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        deepspace: {
+                            900: '#060913',
+                            800: '#0f172a',
+                            700: '#1e293b',
+                        },
+                        clinical: {
+                            blue: '#38bdf8',
+                            slate: '#94a3b8',
+                            cyan: '#06b6d4',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Markdown Rendering -->
+    <style>
+        body {
+            background-color: #060913;
+            color: #e2e8f0;
+        }
+        .markdown-body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+        .markdown-body h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 0.5rem;
+        }
+        .markdown-body h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #06b6d4;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .markdown-body h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .markdown-body p {
+            margin-bottom: 1.25rem;
+            color: #cbd5e1;
+        }
+        .markdown-body ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
+            color: #cbd5e1;
+        }
+        .markdown-body li {
+            margin-bottom: 0.5rem;
+        }
+        .markdown-body blockquote {
+            border-left: 4px solid #38bdf8;
+            padding-left: 1rem;
+            color: #94a3b8;
+            background-color: #0f172a;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+        .markdown-body code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #1e293b;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            color: #38bdf8;
+            font-size: 0.875em;
+        }
+        .markdown-body pre {
+            background-color: #0f172a;
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.25rem;
+            border: 1px solid #1e293b;
+        }
+        .markdown-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #e2e8f0;
+        }
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.25rem;
+        }
+        .markdown-body th, .markdown-body td {
+            border: 1px solid #1e293b;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .markdown-body th {
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Spinner for loading state */
+        .loader {
+            border: 3px solid #1e293b;
+            border-top: 3px solid #38bdf8;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Navigation Sidebar -->
+    <aside class="w-full md:w-72 bg-deepspace-800 border-b md:border-b-0 md:border-r border-deepspace-700 flex flex-col">
+        <div class="p-6 border-b border-deepspace-700">
+            <h1 class="text-xl font-bold text-clinical-blue font-mono tracking-widest">BAAYIODUU</h1>
+            <p class="text-xs text-clinical-slate mt-2 uppercase tracking-wider">Universal Morphospace Archive</p>
+        </div>
+        <nav class="flex-grow p-4 space-y-2 font-mono text-sm">
+            <a href="#home" class="block py-2 px-4 rounded hover:bg-deepspace-700 text-clinical-cyan transition-colors">00. Index/Home</a>
+            <a href="#gene-expression" class="block py-2 px-4 rounded hover:bg-deepspace-700 text-gray-300 transition-colors">01. Gene Expression</a>
+            <a href="#directionality" class="block py-2 px-4 rounded hover:bg-deepspace-700 text-gray-300 transition-colors">02. Directionality Problem</a>
+            <a href="#ummo-corpus" class="block py-2 px-4 rounded hover:bg-deepspace-700 text-gray-300 transition-colors">03. The UMMO Corpus</a>
+        </nav>
+        <div class="p-4 border-t border-deepspace-700 text-xs text-clinical-slate font-mono">
+            STATUS: <span class="text-green-400">ONLINE</span>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 md:p-12 relative h-screen overflow-y-auto">
+        <!-- Loading Indicator -->
+        <div id="loading" class="hidden absolute top-12 left-12 flex items-center space-x-3 text-clinical-blue font-mono">
+            <div class="loader"></div>
+            <span>Transmitting Data Payload...</span>
+        </div>
+        
+        <!-- Diagnostic Error Box -->
+        <div id="error-box" class="hidden bg-red-900/20 border border-red-500/50 text-red-400 p-4 rounded mb-6 font-mono text-sm">
+        </div>
+
+        <!-- Markdown Render Target -->
+        <article id="content" class="markdown-body max-w-4xl mx-auto"></article>
+    </main>
+
+    <script>
+        // Configuration
+        const contentDiv = document.getElementById('content');
+        const loadingDiv = document.getElementById('loading');
+        const errorBox = document.getElementById('error-box');
+        const contentDir = 'articles/';
+
+        // Hardcoded home content for fallback/index
+        const homeMarkdown = `
+# The BAAYIODUU Model Architecture
+
+Welcome to the centralized repository for the physical framework of directed biological evolution and the universal morphospace[cite: 1]. 
+
+Please select a data payload from the navigation matrix to initialize transmission.
+
+### Available Datasets
+*   **01. Gene Expression:** The standard picture of molecular biology[cite: 1].
+*   **02. Directionality Problem:** Challenges to the Darwinian framework and the Cambrian Explosion[cite: 1].
+*   **03. The UMMO Corpus:** Provenance and analysis of documents D58-2 through D58-5[cite: 1].
+        `;
+
+        // Routing & Data Retrieval Mechanism
+        async function loadContent() {
+            // Hide errors and show loader
+            errorBox.classList.add('hidden');
+            contentDiv.innerHTML = '';
+            
+            // Determine route
+            let route = window.location.hash.substring(1);
+            if (!route || route === 'home') {
+                contentDiv.innerHTML = marked.parse(homeMarkdown);
+                return;
+            }
+
+            // Asynchronous Fetch with Error Handling
+            loadingDiv.classList.remove('hidden');
+            try {
+                const response = await fetch(`${contentDir}${route}.md`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: Unable to locate target payload (${route}.md)`);
+                }
+                
+                const markdownText = await response.text();
+                contentDiv.innerHTML = marked.parse(markdownText);
+            } catch (error) {
+                console.error("Data Transmission Failure:", error);
+                errorBox.innerHTML = `> DIAGNOSTIC ERROR: ${error.message}<br>> Action required: Verify that '${contentDir}${route}.md' exists in the deployment directory.`;
+                errorBox.classList.remove('hidden');
+            } finally {
+                loadingDiv.classList.add('hidden');
+            }
+        }
+
+        // Event Listeners
+        window.addEventListener('hashchange', loadContent);
+        window.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+</body>
+</html>
